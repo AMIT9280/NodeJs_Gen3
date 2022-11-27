@@ -18,3 +18,21 @@ exports.addStudent = (req,res)=>{
                 }
         })
 }
+//get All User
+exports.getAllStudent = (req,res)=>{
+
+     
+    
+    studentSchema.find((err,data)=>{
+            if(err){
+                res.status(500).json({
+                    msg:"Data Err.."
+                })
+            }else{
+                res.status(201).json({
+                    data:data,
+                    msg:"Data Faceting Successfully.."
+                })
+            }
+    })
+}

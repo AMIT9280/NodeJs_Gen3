@@ -4,10 +4,11 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 const PORT = 3000;
-const studentController = require("./controller/studentController")
+ 
 const studentRouter = require("./routes/studentRoutes")
 
-app.post("student",studentRouter)
+app.post("/student",studentRouter)
+app.get("/student",studentRouter)
 
 //dataBase
 mongoose.connect("mongodb://localhost:27017/NodeLerning",(err)=>{

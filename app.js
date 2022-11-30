@@ -6,9 +6,12 @@ app.use(express.urlencoded({ extended: true }))
 const PORT = 3000;
  
 const studentRouter = require("./routes/studentRoutes")
+const productRouter = require("./routes/productRoutes")
 
-app.post("/student",studentRouter)
-app.get("/student",studentRouter)
+
+app.use("/student",studentRouter)
+app.use("/product",productRouter)
+ 
 
 //dataBase
 mongoose.connect("mongodb://localhost:27017/NodeLerning",(err)=>{

@@ -1,11 +1,11 @@
-const studentSchema = require("../model/studentSchema")
+const userSchema = require("../model/userSchema")
 
-//addStudent
-exports.addStudent = (req, res) => {
+//AddStudent
+exports.addUser = (req, res) => {
 
-    const Student = new studentSchema(req.body);
+    const user = new userSchema(req.body);
 
-    Student.save((err, data) => {
+    user.save((err, data) => {
         if (err) {
             res.status(500).json({
                 msg: "Data Not Added.."
@@ -19,8 +19,8 @@ exports.addStudent = (req, res) => {
     })
 }
 //get All User
-exports.getAllStudent = (req, res) => {
-    studentSchema.find((err, data) => {
+exports.getAllUser = (req, res) => {
+    userSchema.find((err, data) => {
         if (err) {
             res.status(500).json({
                 msg: "Data Err.."
@@ -34,9 +34,9 @@ exports.getAllStudent = (req, res) => {
     })
 }
 //Update User
-exports.deleteStudent = (req, res) => {
+exports.deleteUser = (req, res) => {
     const id = req.params.id;
-    studentSchema.findByIdAndDelete((err, data) => {
+    userSchema.findByIdAndDelete((err, data) => {
         if (err) {
             res.status(500).json({
                 msg: "Data Err.."
@@ -57,7 +57,7 @@ exports.deleteStudent = (req, res) => {
 };
 //Update student
 
-exports.updateStudent = (req, res) => {
+exports.updateUser = (req, res) => {
     console.log(req.body);
     if (
         req.body.firstName == undefined ||
@@ -71,7 +71,7 @@ exports.updateStudent = (req, res) => {
             msg: "Bad Request.."
         });
     } else {
-        var user = {
+        var user1 = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -82,7 +82,7 @@ exports.updateStudent = (req, res) => {
     }
 
     const id = req.params.id;
-    studentSchema.findOneAndUpdate(id, req.body, (err, data) => {
+    userSchema.findOneAndUpdate(id, req.body, (err, data) => {
         if (err) {
             res.status(500).json({
                 msg: "Data Updating Error.."
@@ -105,9 +105,9 @@ exports.updateStudent = (req, res) => {
 
 //GetStudentById
 
-exports.getStudentById = (req, res) => {
+exports.getUserById = (req, res) => {
     const id = req.params.id
-    studentSchema.findById(id, (err, data) => {
+    userSchema.findById(id, (err, data) => {
         if (err) {
 
             res.status(500).json({

@@ -21,6 +21,9 @@ const userSchema = schema({
     },
     age: {
         type: String
+    },
+    otp:{
+        type:String
     }
 })
 

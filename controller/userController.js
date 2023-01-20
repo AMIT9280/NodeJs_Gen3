@@ -1,9 +1,11 @@
 const userSchema = require("../model/userSchema")
-
+const generateToken = require('../util/GenrateToken') 
+const mailer = require('../util/mailer')
 //AddStudent
 exports.addUser = (req, res) => {
 
     const user = new userSchema(req.body);
+  
 
     user.save((err, data) => {
         if (err) {
@@ -11,6 +13,9 @@ exports.addUser = (req, res) => {
                 msg: "Data Not Added.."
             })
         } else {
+           // mailer.sendMail(data.email);
+          // mailer.sendAttachments(data.email,data.firstName);
+         
             res.status(201).json({
                 data: data,
                 msg: "Data Added Successfully.."
@@ -126,4 +131,56 @@ exports.getUserById = (req, res) => {
             }
         }
     })
+}
+
+//Login 
+exports.Login = (req, res) => {
+    userSchema.findOne({ email: req.body.email }, (err, data) => {
+        if (err) {
+            res.status(500).json({
+                msg: "Err Fetching Data"
+            })
+        } else {
+            if (data.password === req.body.password) {
+                var token = generateToken(data)
+                res.status(200).json({
+                    msg: "Login Done",
+                    token:token 
+                })
+            }else{
+                res.status(401).json({
+                    msg: "Invalid Credentials",
+                })
+            }
+        }
+    })
+}
+
+//forgot pass
+exports.forgetPass = (req,res)=>{
+    var email = req.body.email
+        userSchema.findOne({email},(err,data)=>{
+                if(err){
+                    res.status(500).json({
+                        msg: "Error In Generating Otp"
+                    })
+                }else{
+                    var otp = Math.floor((Math.random()*1000000)+1).toString();
+                    mailer.sendMail(data.email,otp);
+                    
+                    userSchema.updateOne({email},{otp:otp},(err,data)=>{
+                        if(err){
+                            res.status(500).json({
+                                msg: "Error In Update Otp"
+                            })
+                        }else{
+                            res.status(200).json({
+                                msg: "otp send to your mail",
+                            })
+                        }
+                    })
+
+                     
+                }
+        })
 }

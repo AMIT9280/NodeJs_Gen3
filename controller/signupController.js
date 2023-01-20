@@ -58,9 +58,5 @@ exports.validate = (req, res) => {
                 data: data
             })
         }
-
     })
-
-
-
 }

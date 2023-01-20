@@ -32,9 +32,9 @@ const sendAttachments = async (to,name) => {
 
     const transporter = mailer.createTransport({
 
-        service: 'gmail',
-        port: 587,
-        secure: false,
+        service: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
         auth: {
             user: "amit.royal223344@gmail.com",
             pass: "hpdmoifqrmzyoaox"

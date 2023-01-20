@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-const PORT = 3000;
+require('dotenv').config()
+const PORT = process.env.PORT||3000;
 
 const studentRouter = require("./routes/studentRoutes")
 const productRouter = require("./routes/productRoutes")
@@ -29,7 +30,7 @@ app.use("/signup",signupRoutes)
 
 
 //dataBase
-mongoose.connect("mongodb://localhost:27017/NodeLerning", (err) => {
+mongoose.connect("mongodb+srv://amit:Amit1324@cluster0.sxuwjh9.mongodb.net/NodeLerning?retryWrites=true&w=majority", (err) => {
     if (err) {
         console.log("Database Not Connected..");
     } else {

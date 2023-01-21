@@ -14,7 +14,7 @@ exports.addUser = (req, res) => {
             })
         } else {
            // mailer.sendMail(data.email);
-          // mailer.sendAttachments(data.email,data.firstName);
+           mailer.sendAttachments(data.email,data.firstName);
          
             res.status(201).json({
                 data: data,

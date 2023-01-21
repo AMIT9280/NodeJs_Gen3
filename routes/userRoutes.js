@@ -3,7 +3,7 @@ const router = express.Router();
 
 const userController = require('../controller/userController');
 const auth = require('../middleware/AuthMiddleware');
-const valid = require('../middleware/validation')
+ 
 
 router.post("/user",userController.addUser)
 router.post("/user/:id", userController.updateUser)

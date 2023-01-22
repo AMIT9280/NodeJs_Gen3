@@ -28,7 +28,7 @@ exports.GetAllCart = (req,res) => {
                 msg: "Error In Fetching Cart"
             })
         } else {
-            res.status(201).json({
+            res.status(201).json({      
                 msg: "Cart Data Ret....",
                 data: data
             })
